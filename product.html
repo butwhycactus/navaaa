@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nava Threads | Product</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Plus Jakarta Sans',sans-serif;
+}
+
+body{
+background:#faf8f5;
+color:#222;
+}
+
+header{
+background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 40%, #e2e8f0 100%);
+padding:24px 30px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 6px 18px rgba(0,0,0,0.08);
+border-radius:24px;
+}
+
+.header-left{
+display:flex;
+align-items:center;
+gap:18px;
+}
+
+.site-logo-wrapper{
+width:88px;
+height:88px;
+border-radius:50%;
+overflow:hidden;
+background:white;
+box-shadow:0 10px 30px rgba(0,0,0,0.12);
+}
+
+.site-logo{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}
+
+.header-copy{
+display:flex;
+flex-direction:column;
+gap:6px;
+}
+
+header h1{
+font-family:'Playfair Display',serif;
+font-size:36px;
+letter-spacing:0.04em;
+margin:0;
+}
+
+.insta-handle{
+font-size:14px;
+color:#475569;
+font-weight:600;
+}
+
+.back{
+text-decoration:none;
+color:black;
+font-weight:bold;
+}
+
+.container{
+max-width:1300px;
+margin:50px auto;
+display:flex;
+gap:60px;
+padding:20px;
+}
+
+.left{
+flex:1;
+}
+
+.right{
+flex:1;
+}
+
+#mainImage{
+width:100%;
+height:650px;
+object-fit:cover;
+border-radius:15px;
+}
+
+.thumbnails{
+display:flex;
+gap:15px;
+margin-top:20px;
+}
+
+.thumbnails img{
+width:90px;
+height:110px;
+cursor:pointer;
+border-radius:8px;
+object-fit:cover;
+border:2px solid transparent;
+}
+
+.thumbnails img:hover{
+border-color:gold;
+}
+
+.category{
+margin-top:20px;
+color:grey;
+}
+
+.price{
+font-size:34px;
+font-weight:bold;
+margin:20px 0;
+}
+
+.stock{
+color:green;
+font-weight:bold;
+margin-bottom:20px;
+}
+
+.description{
+line-height:1.8;
+color:#555;
+margin-bottom:30px;
+}
+
+button{
+padding:15px 35px;
+border:none;
+font-size:18px;
+cursor:pointer;
+border-radius:8px;
+margin-right:15px;
+}
+
+.add{
+background:#102321;
+color:white;
+}
+
+.buy{
+background:gold;
+}
+
+.bag-panel{
+background:white;
+padding:20px;
+border-radius:16px;
+box-shadow:0 10px 20px rgba(15,23,42,0.08);
+margin-bottom:24px;
+}
+
+.bag-panel h2{
+margin:0 0 12px;
+font-size:18px;
+}
+
+.bag-item{
+display:flex;
+align-items:center;
+gap:12px;
+margin-bottom:12px;
+}
+
+.bag-item img{
+width:60px;
+height:60px;
+border-radius:12px;
+object-fit:cover;
+}
+
+.bag-item-meta{
+flex:1;
+}
+
+.bag-item-meta strong{
+display:block;
+font-size:15px;
+margin-bottom:4px;
+}
+
+.bag-item-meta span{
+font-size:13px;
+color:#475569;
+}
+
+.bag-actions{
+display:flex;
+align-items:center;
+gap:8px;
+margin-top:8px;
+}
+
+.bag-actions button{
+background:#f1f5f9;
+border:none;
+padding:8px 12px;
+border-radius:8px;
+cursor:pointer;
+}
+
+.bag-actions .danger-btn{
+background:#fee2e2;
+color:#b91c1c;
+}
+
+.bag-summary{
+margin-top:16px;
+font-weight:700;
+}
+
+.bag-message{
+margin-top:12px;
+color:#22543d;
+font-weight:600;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+    <div class="header-left">
+        <div class="site-logo-wrapper">
+            <img src="logo.png" alt="NAVATHREADS logo" class="site-logo">
+        </div>
+        <div class="header-copy">
+            <a href="https://instagram.com/navathreads" target="_blank" rel="noopener noreferrer" class="insta-handle">@navathreads</a>
+            <h1>NAVATHREADS</h1>
+            <div style="color:#64748b; font-size:14px;">Threads that define U</div>
+        </div>
+    </div>
+    <div style="display:flex; gap:14px; align-items:center;">
+        <a href="index.html" class="back">← Back to Collection</a>
+        <a href="cart.html" class="back" style="background:#102321; color:white; padding:10px 14px; border-radius:10px;">View Cart</a>
+    </div>
+</header>
+
+<div class="container">
+
+<div class="left">
+
+<img id="mainImage">
+
+<div class="thumbnails" id="thumbs"></div>
+
+</div>
+
+<div class="right">
+
+<div id="user-section" style="background:white; padding:20px; border-radius:15px; box-shadow:0 4px 15px rgba(0,0,0,0.04); margin-bottom:24px;"></div>
+<div id="bag-panel" class="bag-panel"></div>
+<h1 id="name"></h1>
+
+<p class="category" id="category"></p>
+
+<div class="price" id="price"></div>
+
+<div class="stock" id="stock"></div>
+
+<p class="description">
+
+Premium handcrafted clothing from Nava Threads.
+
+Every piece is carefully selected to provide elegance,
+comfort and timeless fashion.
+
+</p>
+
+<button class="add" onclick="addToBag()">
+Add To Bag
+</button>
+
+<button class="buy" onclick="purchaseProduct()">
+Buy Now
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+// HARDCODED PRODUCTS DATA (no backend needed)
+const PRODUCTS_DATA = [
+  {"id": 1, "name": "Pastel Lucknowi Chikankari Kurta", "category": "Chikankari", "price": 2499, "stockCount": 0, "images": ["https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=600&q=80", "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=600&q=80"]},
+  {"id": 2, "name": "Minimalist Chic Satin Western Top", "category": "Western", "price": 1299, "stockCount": 2, "images": ["https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80", "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=80"]},
+  {"id": 3, "name": "Royal Banarasi Silk Saree", "category": "Sarees", "price": 5499, "stockCount": 1, "images": ["https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=600&q=80", "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=600&q=80"]},
+  {"id": 4, "name": "Elegance Tiered Maxi Dress", "category": "Women's Wear", "price": 2899, "stockCount": 4, "images": ["https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=600&q=80", "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80"]},
+  {"id": 5, "name": "Handcrafted Bandhani Kurta Set", "category": "Women's Wear", "price": 3399, "stockCount": 5, "images": ["https://images.unsplash.com/photo-1520614073990-dd6022d76bb6?auto=format&fit=crop&w=600&q=80", "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=600&q=80"]},
+  {"id": 6, "name": "Embroidered Nehru Jacket", "category": "Men's Wear", "price": 2599, "stockCount": 3, "images": ["https://images.unsplash.com/photo-1521572267360-ee0c289ead41?auto=format&fit=crop&w=600&q=80", "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80"]},
+  {"id": 7, "name": "Festive Printed Palazzo Set", "category": "Western", "price": 2199, "stockCount": 6, "images": ["https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=600&q=80", "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80"]}
+];
+
+let currentProduct;
+const authKey = 'navathreads_user';
+const params = new URLSearchParams(window.location.search);
+const id = parseInt(params.get("id"), 10);
+
+function loadProduct() {
+    const products = PRODUCTS_DATA;
+
+    if (isNaN(id)) {
+        currentProduct = products[0];
+    } else {
+        currentProduct = products.find(p => p.id == id);
+    }
+
+    if (!currentProduct) {
+        document.body.innerHTML = "<h1>Product not found</h1>";
+        return;
+    }
+
+    document.getElementById("name").innerHTML = currentProduct.name;
+    document.getElementById("category").innerHTML = currentProduct.category;
+    document.getElementById("price").innerHTML = "₹" + currentProduct.price.toLocaleString("en-IN");
+    updateStockText();
+
+    const mainImage = document.getElementById("mainImage");
+    if (currentProduct.images && currentProduct.images.length > 0) {
+        mainImage.src = currentProduct.images[0];
+    } else {
+        mainImage.src = 'https://via.placeholder.com/800x650?text=Image+Not+Available';
+    }
+
+    let html = "";
+    if (currentProduct.images && currentProduct.images.length > 0) {
+        currentProduct.images.forEach(img => {
+            html += `
+                <img src="${img}" onclick="document.getElementById('mainImage').src='${img}'">
+            `;
+        });
+    }
+    document.getElementById("thumbs").innerHTML = html;
+    renderUserSection();
+    renderCartUI();
+}
+
+function updateStockText() {
+    const stockText = document.getElementById('stock');
+    stockText.innerHTML = currentProduct.stockCount > 0
+        ? `In Stock : ${currentProduct.stockCount} left`
+        : 'Out of Stock';
+}
+
+function getCurrentUser() {
+    try {
+        return JSON.parse(localStorage.getItem(authKey));
+    } catch (e) {
+        return null;
+    }
+}
+
+function setCurrentUser(user) {
+    localStorage.setItem(authKey, JSON.stringify(user));
+}
+
+function clearCurrentUser() {
+    localStorage.removeItem(authKey);
+}
+
+function getCart() {
+    try {
+        return JSON.parse(localStorage.getItem('navathreads_cart')) || [];
+    } catch (e) {
+        return [];
+    }
+}
+
+function saveCart(cart) {
+    localStorage.setItem('navathreads_cart', JSON.stringify(cart));
+}
+
+function renderCartUI() {
+    const cart = getCart();
+    const panel = document.getElementById('bag-panel');
+    if (!panel) return;
+
+    if (cart.length === 0) {
+        panel.innerHTML = `
+            <div class="bag-panel">
+                <h2>Your Bag</h2>
+                <div>Your bag is empty. Add something to see it here.</div>
+            </div>
+        `;
+        return;
+    }
+
+    let html = `<div class="bag-panel"><h2>Your Bag</h2>`;
+    let totalCount = 0;
+    let totalPrice = 0;
+    cart.forEach(item => {
+        totalCount += item.quantity;
+        totalPrice += item.quantity * item.price;
+        html += `
+            <div class="bag-item">
+                <img src="${item.image || 'https://via.placeholder.com/60'}" alt="${item.name}">
+                <div class="bag-item-meta">
+                    <strong>${item.name}</strong>
+                    <span>${item.quantity} x ₹${item.price}</span>
+                    <div class="bag-actions">
+                        <button type="button" onclick="changeCartQuantity(${item.productId}, -1)">-</button>
+                        <button type="button" onclick="changeCartQuantity(${item.productId}, 1)">+</button>
+                        <button type="button" class="danger-btn" onclick="removeCartItem(${item.productId})">Remove</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+    html += `
+        <div class="bag-summary">Items: ${totalCount} • Total: ₹${totalPrice}</div>
+    `;
+    html += `</div>`;
+    panel.innerHTML = html;
+}
+
+function changeCartQuantity(productId, delta) {
+    const cart = getCart();
+    const item = cart.find(i => i.productId === productId);
+    if (!item) return;
+    item.quantity = Math.max(1, item.quantity + delta);
+    saveCart(cart);
+    renderCartUI();
+}
+
+function removeCartItem(productId) {
+    let cart = getCart();
+    cart = cart.filter(i => i.productId !== productId);
+    saveCart(cart);
+    renderCartUI();
+}
+
+function addToBag() {
+    if (!currentProduct) return;
+    const cart = getCart();
+    const existing = cart.find(item => item.productId === currentProduct.id);
+    if (existing) {
+        existing.quantity += 1;
+    } else {
+        cart.push({
+            productId: currentProduct.id,
+            name: currentProduct.name,
+            price: currentProduct.price,
+            image: currentProduct.images && currentProduct.images[0] ? currentProduct.images[0] : '' ,
+            quantity: 1
+        });
+    }
+    saveCart(cart);
+    renderCartUI();
+    const message = document.createElement('div');
+    message.className = 'bag-message';
+    message.textContent = 'Added to bag. Click Buy Now to checkout.';
+    const panel = document.getElementById('bag-panel');
+    panel.appendChild(message);
+    setTimeout(() => {
+        if (panel.contains(message)) panel.removeChild(message);
+    }, 3000);
+}
+
+function clearCart() {
+    saveCart([]);
+    renderCartUI();
+}
+
+function renderUserSection() {
+    const user = getCurrentUser();
+    const panel = document.getElementById('user-section');
+
+    if (user) {
+        panel.innerHTML = `
+            <div style="display:grid; gap:10px;">
+                <div><strong>Signed in as:</strong> ${user.name}</div>
+                <div><strong>Phone:</strong> ${user.phone}</div>
+                <div style="color:#555;">You can buy this item now.</div>
+                <button onclick="logout()" style="width:fit-content; background:#e53e3e; color:white;">Logout</button>
+            </div>
+        `;
+        return;
+    }
+
+    panel.innerHTML = `
+        <div style="display:grid; gap:12px;">
+            <div style="font-weight:700;">Member login / register</div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button onclick="showLoginForm()" style="background:#102321; color:white;">Login</button>
+                <button onclick="showRegisterForm()" style="background:gold;">Register</button>
+            </div>
+            <div id="auth-form"></div>
+        </div>
+    `;
+}
+
+function showLoginForm() {
+    document.getElementById('auth-form').innerHTML = `
+        <form onsubmit="loginUser(event)" style="display:grid; gap:10px; margin-top:10px;">
+            <input id="login-phone" placeholder="Enter phone number" required>
+            <button type="submit" style="background:#2d3748; color:white;">Login</button>
+        </form>
+    `;
+}
+
+function showRegisterForm() {
+    document.getElementById('auth-form').innerHTML = `
+        <form onsubmit="registerUser(event)" style="display:grid; gap:10px; margin-top:10px;">
+            <input id="register-name" placeholder="Full name" required>
+            <input id="register-phone" placeholder="Phone number (10 digits)" maxlength="10" required>
+            <input id="register-pincode" placeholder="Pincode (6 digits)" maxlength="6" required>
+            <textarea id="register-address" placeholder="Address" rows="3" style="resize:none; padding:10px; border-radius:6px; border:1px solid #d1d5db;" required></textarea>
+            <button type="submit" style="background:#2d3748; color:white;">Register</button>
+        </form>
+    `;
+}
+
+async function loginUser(event) {
+    event.preventDefault();
+    const phone = document.getElementById('login-phone').value.trim();
+    if (!phone) return alert('Phone number is required.');
+    const res = await fetch('/api/users/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone })
+    });
+    const data = await res.json();
+    if (!res.ok) return alert(data.message || 'Login failed.');
+    setCurrentUser(data.user);
+    alert(`Welcome back, ${data.user.name}!`);
+    renderUserSection();
+}
+
+async function registerUser(event) {
+    event.preventDefault();
+    const name = document.getElementById('register-name').value.trim();
+    const phone = document.getElementById('register-phone').value.trim();
+    const pincode = document.getElementById('register-pincode').value.trim();
+    const address = document.getElementById('register-address').value.trim();
+
+    if (!name || !phone || !pincode || !address) {
+        return alert('All fields are required.');
+    }
+    if (!/^[0-9]{10}$/.test(phone)) {
+        return alert('Phone number must be exactly 10 digits.');
+    }
+    if (!/^[0-9]{6}$/.test(pincode)) {
+        return alert('Pincode must be exactly 6 digits.');
+    }
+
+    const res = await fetch('/api/users/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, pincode, address })
+    });
+    const data = await res.json();
+    if (!res.ok) return alert(data.message || 'Registration failed.');
+    setCurrentUser(data.user);
+    alert(`Registration complete. Welcome, ${data.user.name}!`);
+    renderUserSection();
+}
+
+function logout() {
+    clearCurrentUser();
+    renderUserSection();
+    alert('Logged out.');
+}
+
+async function purchaseProduct() {
+    const user = getCurrentUser();
+    if (!user) {
+        const returnUrl = encodeURIComponent(window.location.pathname + window.location.search);
+        window.location.href = `login.html?return=${returnUrl}`;
+        return;
+    }
+
+    const cart = getCart();
+    const itemsToPurchase = cart.length > 0 ? cart : [{ productId: currentProduct.id, quantity: 1, name: currentProduct.name, price: currentProduct.price }];
+
+    if (cart.length === 0 && (!currentProduct || currentProduct.stockCount <= 0)) {
+        return alert('Product not available');
+    }
+
+    for (const item of itemsToPurchase) {
+        const res = await fetch('/api/purchase', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ productId: item.productId, phone: user.phone, quantity: item.quantity })
+        });
+        const data = await res.json();
+        if (!res.ok) {
+            return alert(data.message || `Purchase failed for ${item.name}.`);
+        }
+        if (item.productId === currentProduct.id) {
+            currentProduct.stockCount = data.product.stockCount;
+            updateStockText();
+        }
+    }
+
+    clearCart();
+    alert(`Purchase successful. Thank you, ${user.name}! We will contact you on WhatsApp at ${user.phone} shortly.`);
+}
+
+loadProduct();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAVATHREADS Login</title>
+    <style>
+        body { margin:0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background:#eef2ff; color:#102a43; }
+        .page { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; }
+        .card { width:min(100%,560px); background:white; border-radius:28px; padding:34px; box-shadow:0 24px 70px rgba(15,23,42,0.12); border:1px solid #dbeafe; }
+        h1 { margin:0 0 12px; font-size:32px; }
+        p { margin:0 0 24px; color:#475569; line-height:1.7; }
+        .tabs { display:flex; gap:10px; margin-bottom:22px; }
+        .tab { flex:1; padding:14px 16px; border-radius:16px; text-align:center; cursor:pointer; border:1px solid #e2e8f0; background:#f8fafc; font-weight:700; }
+        .tab.active { background:#4c51bf; color:white; border-color:#4c51bf; }
+        form { display:grid; gap:14px; }
+        input, textarea { width:100%; padding:14px 16px; border:1px solid #cbd5e1; border-radius:14px; font-size:15px; }
+        textarea { min-height:100px; resize:vertical; }
+        button { width:100%; padding:16px; border:none; border-radius:16px; background:#4c51bf; color:white; font-weight:700; cursor:pointer; }
+        .links { display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-top:18px; }
+        .links a { color:#4c51bf; text-decoration:none; font-weight:700; }
+        .message { margin-top:14px; color:#2563eb; min-height:22px; }
+    </style>
+</head>
+<body>
+<div class="page">
+    <div class="card">
+        <h1>Welcome Back</h1>
+        <p>Login or register to continue to checkout and complete your purchase.</p>
+        <div class="tabs">
+            <div id="login-tab" class="tab active" onclick="showLogin()">Login</div>
+            <div id="register-tab" class="tab" onclick="showRegister()">Register</div>
+        </div>
+        <div id="form-container"></div>
+        <div class="message" id="message"></div>
+        <div class="links">
+            <a href="index.html">Back to Store</a>
+            <a href="cart.html">View Cart</a>
+        </div>
+    </div>
+</div>
+<script>
+    const authKey = 'navathreads_user';
+    const params = new URLSearchParams(window.location.search);
+    const returnUrl = params.get('return') || 'cart.html';
+
+    function setMessage(text) { document.getElementById('message').textContent = text; }
+
+    function saveUser(user) { localStorage.setItem(authKey, JSON.stringify(user)); }
+
+    function redirectBack() { window.location.href = returnUrl; }
+
+    function showLogin() {
+        document.getElementById('login-tab').classList.add('active');
+        document.getElementById('register-tab').classList.remove('active');
+        document.getElementById('form-container').innerHTML = `
+            <form onsubmit="login(event)">
+                <input id="phone" type="text" maxlength="10" placeholder="Phone number" required>
+                <button type="submit">Login</button>
+            </form>
+        `;
+        setMessage('');
+    }
+
+    function showRegister() {
+        document.getElementById('login-tab').classList.remove('active');
+        document.getElementById('register-tab').classList.add('active');
+        document.getElementById('form-container').innerHTML = `
+            <form onsubmit="register(event)">
+                <input id="name" placeholder="Full name" required>
+                <input id="phone" type="text" maxlength="10" placeholder="Phone number" required>
+                <input id="pincode" type="text" maxlength="6" placeholder="Pincode" required>
+                <textarea id="address" placeholder="Address" required></textarea>
+                <button type="submit">Register</button>
+            </form>
+        `;
+        setMessage('');
+    }
+
+    async function login(event) {
+        event.preventDefault();
+        const phone = document.getElementById('phone').value.trim();
+        if (!/^[0-9]{10}$/.test(phone)) { setMessage('Enter a valid 10-digit phone number.'); return; }
+        try {
+            const res = await fetch('/api/users/login', {
+                method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ phone })
+            });
+            const data = await res.json();
+            if (!res.ok) { setMessage(data.message || 'Login failed.'); return; }
+            saveUser(data.user);
+            setMessage(`Welcome back, ${data.user.name}! Redirecting...`);
+            setTimeout(redirectBack, 800);
+        } catch (err) { setMessage('Network error. Please try again.'); }
+    }
+
+    async function register(event) {
+        event.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const pincode = document.getElementById('pincode').value.trim();
+        const address = document.getElementById('address').value.trim();
+        if (!name || !phone || !pincode || !address) { setMessage('All fields are required.'); return; }
+        if (!/^[0-9]{10}$/.test(phone)) { setMessage('Phone must be 10 digits.'); return; }
+        if (!/^[0-9]{6}$/.test(pincode)) { setMessage('Pincode must be 6 digits.'); return; }
+        try {
+            const res = await fetch('/api/users/register', {
+                method:'POST', headers:{'Content-Type':'application/json'},
+                body: JSON.stringify({ name, phone, pincode, address })
+            });
+            const data = await res.json();
+            if (!res.ok) { setMessage(data.message || 'Registration failed.'); return; }
+            saveUser(data.user);
+            setMessage('Registered successfully. Redirecting...');
+            setTimeout(redirectBack, 800);
+        } catch (err) { setMessage('Network error. Please try again.'); }
+    }
+
+    showLogin();
+</script>
+</body>
+</html>
